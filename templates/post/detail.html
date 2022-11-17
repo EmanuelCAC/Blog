@@ -1,0 +1,13 @@
+{% extends '_layout1.html' %}
+
+{% block content %}
+    <article>
+    <h1>{{ post.pub_date|date:"d / m / Y" }}</h1>
+    <p>{{ post.body_text }}</p>
+    <p>
+        {% if post.imagem.url is not None %}
+        <img src="{{ post.imagem.url }}">
+        {% endif %}
+    </p>
+    </article>
+{% endblock %}

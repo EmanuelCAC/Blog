@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meu Blog</title>
+</head>
+
+<body>
+    {% extends '_layout1.html' %}
+    <!-- herda tudo que já tem em _layout1.html -->
+    {% block head_title %}
+    Meu Blog
+    {% endblock %}
+    {% block content %}
+    <!-- substitui o bloco content em _layout1.html -->
+    <h1>Bem vindo ao Blog</h1>
+    <a href="{% url 'post_add' %}" class="btn btn-lg btn-primary font-weight-bold">
+        + Post
+    </a>
+    {% for post in posts_list %}
+    <article>
+        <h2>Em: {{ post.pub_date|date:"d / m / Y" }}</h2>
+        <span>Categoria: {{ post.categoria }}</span>
+        <p>{{ post.body_text }}</p>
+        <p><a href="/post/{{ post.id }}">
+            Ver Mais
+        </a> 
+        |
+        <a href="{% url 'post_edit' pk=post.id %}" class="link-secondary">
+            Editar
+        </a>
+        |
+        <a href="{% url 'post_delete' pk=post.id %}" class="link-secondary">
+            Excluir
+        </a>
+        </p> 
+    </article>
+    {% endfor %}
+    
+    {% endblock %}
+    <!-- fecha o bloco content -->
+</body>
+
+</html>
